@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+class NthDigitInSequence {
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        int count = 0;
+        int number = 1;
+        int lastNumber = 0;
+
+        while (count < n) 
+        {
+            lastNumber = number++;
+            count += String.valueOf(lastNumber).length();
+        }
+
+        int diff = count - n;
+        int temp = lastNumber / (int) Math.pow(10, diff);
+        System.out.println(temp % 10);
+    }
+}
