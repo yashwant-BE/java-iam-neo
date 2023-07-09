@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main 
+{
+    public static void main(String[] args) 
+    {
+        ArrayList<String> list = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    append(list, scanner.next());
+                    break;
+                case 2:
+                    insert(list, scanner.next(), scanner.nextInt());
+                    break;
+                case 3:
+                    search(list, scanner.next());
+                    break;
+                case 4:
+                    listStrings(list, scanner.next().charAt(0));
+                    break;
+                case 5:
+                    scanner.close();
+                    System.out.println("Exiting.");
+                    System.exit(0);
+            }
+        }
+    }
+
+    public static void append(ArrayList<String> list, String str) {
+        list.add(str);
+        System.out.println(str + " appended.");
+    }
+
+    public static void insert(ArrayList<String> list, String str, int index) {
+        list.add(index, str);
+        System.out.println(str + " inserted at index " + index + ".");
+    }
+
+    public static void search(ArrayList<String> list, String str) 
+    {
+        if (list.contains(str)) 
+        {
+            System.out.println(str + " found.");
+        } 
+        else 
+        {
+            System.out.println(str + " not found.");
+        }
+        
+    }
+
+    public static void listStrings(ArrayList<String> list, char letter) 
+    {
+        for (String str : list) 
+        {
+            if (str.charAt(0) == letter) 
+            {
+                System.out.println(str);
+            }
+        }
+    }
+}
