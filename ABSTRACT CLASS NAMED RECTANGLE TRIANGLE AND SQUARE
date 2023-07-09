@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+abstract class Shape {
+    int dimension1, dimension2;
+
+    public abstract void printArea();
+
+    public abstract void numberOfSides();
+}
+
+class Rectangle extends Shape {
+    public void printArea() {
+        int area = dimension1 * dimension2;
+        System.out.println("The area of the Rectangle is: " + area);
+    }
+
+    public void numberOfSides() {
+        System.out.println("The Rectangle has 4 sides");
+    }
+}
+
+class Triangle extends Shape {
+    public void printArea() {
+        double area = 0.5 * dimension1 * dimension2;
+        System.out.println("The area of the Triangle is: " + area);
+    }
+
+    public void numberOfSides() {
+        System.out.println("The Triangle has 3 sides");
+    }
+}
+
+class Circle extends Shape {
+    public void printArea() {
+        double area = 3.14 * dimension1 * dimension1;
+        System.out.println("The area of the Circle is: " + area);
+    }
+
+    public void numberOfSides() {
+        System.out.println("The Circle has 0 sides");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        Rectangle rect = new Rectangle();
+        rect.dimension1 = sc.nextInt();
+        rect.dimension2 = sc.nextInt();
+        rect.printArea();
+        rect.numberOfSides();
+
+        Triangle tri = new Triangle();
+        tri.dimension1 = sc.nextInt();
+        tri.dimension2 = sc.nextInt();
+        tri.printArea();
+        tri.numberOfSides();
+
+        Circle cir = new Circle();
+        cir.dimension1 = sc.nextInt();
+        cir.printArea();
+        cir.numberOfSides();
+
+        sc.close();
+    }
+}
