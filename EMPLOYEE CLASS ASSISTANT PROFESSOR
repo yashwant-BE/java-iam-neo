@@ -1,0 +1,159 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            /*System.out.println("\nEnter your choice:");
+            System.out.println("1. Programmer");
+            System.out.println("2. Assistant Professor");
+            System.out.println("3. Associate Professor");
+            System.out.println("4. Professor");
+            System.out.println("5. Exit");*/
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    //System.out.println("Enter Employee Name: ");
+                    String empName = sc.next();
+                    //System.out.println("Enter Employee ID: ");
+                    int empID = sc.nextInt();
+                    //System.out.println("Enter Address: ");
+                    String address = sc.next();
+                    //System.out.println("Enter Mail ID: ");
+                    String mailID = sc.next();
+                    //System.out.println("Enter Mobile Number: ");
+                    long mobileNo = sc.nextLong();
+                    //System.out.println("Enter Basic Pay: ");
+                    double basicPay = sc.nextDouble();
+                    Programmer p = new Programmer(empName, empID, address, mailID, mobileNo, basicPay);
+                    p.generatePaySlip();
+                    break;
+                case 2:
+                    //System.out.println("Enter Employee Name: ");
+                    empName = sc.next();
+                    //System.out.println("Enter Employee ID: ");
+                    empID = sc.nextInt();
+                    //System.out.println("Enter Address: ");
+                    address = sc.next();
+                    //System.out.println("Enter Mail ID: ");
+                    mailID = sc.next();
+                    //System.out.println("Enter Mobile Number: ");
+                    mobileNo = sc.nextLong();
+                    //System.out.println("Enter Basic Pay: ");
+                    basicPay = sc.nextDouble();
+                    AssistantProfessor ap = new AssistantProfessor(empName, empID, address, mailID, mobileNo, basicPay);
+                    ap.generatePaySlip();
+                    break;
+                case 3:
+                    //System.out.println("Enter Employee Name: ");
+                    empName = sc.next();
+                    //System.out.println("Enter Employee ID: ");
+                    empID = sc.nextInt();
+                    //System.out.println("Enter Address: ");
+                    address = sc.next();
+                    //System.out.println("Enter Mail ID: ");
+                    mailID = sc.next();
+                    //System.out.println("Enter Mobile Number: ");
+                    mobileNo = sc.nextLong();
+                    //System.out.println("Enter Basic Pay: ");
+                    basicPay = sc.nextDouble();
+                    AssociateProfessor asp = new AssociateProfessor(empName, empID, address, mailID, mobileNo, basicPay);
+                    asp.generatePaySlip();
+                    break;
+                case 4:
+                    //System.out.println("Enter Employee Name: ");
+                    empName = sc.next();
+                    //System.out.println("Enter Employee ID: ");
+                    empID = sc.nextInt();
+                    //System.out.println("Enter Address: ");
+                    address = sc.next();
+                    //System.out.println("Enter Mail ID: ");
+                    mailID = sc.next();
+                    //System.out.println("Enter Mobile Number: ");
+                    mobileNo = sc.nextLong();
+                    //System.out.println("Enter Basic Pay: ");
+                    basicPay = sc.nextDouble();
+                    Professor pr = new Professor(empName, empID, address, mailID, mobileNo, basicPay);
+                    pr.generatePaySlip();
+                    break;
+                case 5:
+                    System.out.println("Exiting...");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 5);
+    }
+}
+Employee.java
+
+public class Employee {
+    String emp_name;
+    int emp_id;
+    String address;
+    String mail_id;
+    long mobile_no;
+    double basic_pay;
+
+    public Employee(String emp_name, int emp_id, String address, String mail_id, long mobile_no, double basic_pay) {
+        this.emp_name = emp_name;
+        this.emp_id = emp_id;
+        this.address = address;
+        this.mail_id = mail_id;
+        this.mobile_no = mobile_no;
+        this.basic_pay = basic_pay;
+    }
+
+    public void generatePaySlip() {
+        double da = 0.97 * basic_pay;
+        double hra = 0.1 * basic_pay;
+        double pf = 0.12 * basic_pay;
+        double staff_fund = 0.001 * basic_pay;
+        double gross_salary = basic_pay + da + hra;
+        double net_salary = gross_salary - pf - staff_fund;
+
+        
+        System.out.println("Pay Slip for Employee ID: " + emp_id);
+        System.out.println("Employee Name: " + emp_name);
+        System.out.println("Address: " + address);
+        System.out.println("Email ID: " + mail_id);
+        System.out.println("Mobile Number: " + mobile_no);
+        System.out.println("Basic Pay: " + basic_pay);
+        System.out.println("DA (97% of Basic Pay): " + da);
+        System.out.println("HRA (10% of Basic Pay): " + hra);
+        System.out.println("PF (12% of Basic Pay): " + pf);
+        System.out.println("Staff Club Fund (0.1% of Basic Pay): " + staff_fund);
+        System.out.println("\nGross Salary: " + gross_salary);
+        System.out.println("Net Salary: " + net_salary);
+
+    }
+}
+Programmer.java
+
+public class Programmer extends Employee {
+    public Programmer(String emp_name, int emp_id, String address, String mail_id, long mobile_no, double basic_pay) {
+        super(emp_name, emp_id, address, mail_id, mobile_no, basic_pay);
+    }
+}
+AssistantProfessor.java
+
+public class AssistantProfessor extends Employee {
+    public AssistantProfessor(String emp_name, int emp_id, String address, String mail_id, long mobile_no, double basic_pay) {
+        super(emp_name, emp_id, address, mail_id, mobile_no, basic_pay);
+    }
+}
+AssociateProfessor.java
+
+public class AssociateProfessor extends Employee {
+    public AssociateProfessor(String emp_name, int emp_id, String address, String mail_id, long mobile_no, double basic_pay) {
+        super(emp_name, emp_id, address, mail_id, mobile_no, basic_pay);
+    }
+}
+Professor.java
+
+public class Professor extends Employee {
+    public Professor(String emp_name, int emp_id, String address, String mail_id, long mobile_no, double basic_pay) {
+        super(emp_name, emp_id, address, mail_id, mobile_no, basic_pay);
+    }
+}
