@@ -1,0 +1,107 @@
+import java.util.Scanner;
+
+class EBBill {
+    protected int consumerNo;
+    protected String consumerName;
+    protected int prevMonthReading;
+    protected int currMonthReading;
+    protected String ebConnectionType;
+    protected int unitsConsumed;
+
+    public EBBill(int consumerNo, String consumerName, int prevMonthReading, int currMonthReading, String ebConnectionType) {
+        this.consumerNo = consumerNo;
+        this.consumerName = consumerName;
+        this.prevMonthReading = prevMonthReading;
+        this.currMonthReading = currMonthReading;
+        this.ebConnectionType = ebConnectionType;
+        this.unitsConsumed = this.currMonthReading - this.prevMonthReading;
+    }
+
+    public double calculateBillAmount() {
+        return 0;
+    }
+
+    public void displayBill() {
+        System.out.println("Consumer No.: " + this.consumerNo);
+        System.out.println("Consumer Name: " + this.consumerName);
+        System.out.println("Previous Month Reading: " + this.prevMonthReading);
+        System.out.println("Current Month Reading: " + this.currMonthReading);
+        System.out.println("Units Consumed: " + this.unitsConsumed);
+        System.out.println("Electricity Connection Type: " + this.ebConnectionType);
+        System.out.println("Bill Amount: " + this.calculateBillAmount());
+    }
+}
+
+class DomesticBill extends EBBill {
+    public DomesticBill(int consumerNo, String consumerName, int prevMonthReading, int currMonthReading) {
+        super(consumerNo, consumerName, prevMonthReading, currMonthReading, "Domestic");
+    }
+
+    @Override
+    public double calculateBillAmount() {
+        double billAmount = 0;
+        if (this.unitsConsumed <= 100) {
+            billAmount = this.unitsConsumed * 1;
+        } else if (this.unitsConsumed <= 200) {
+            billAmount = 100 * 1 + (this.unitsConsumed - 100) * 2.5;
+        } else if (this.unitsConsumed <= 500) {
+            billAmount = 100 * 1 + 100 * 2.5 + (this.unitsConsumed - 200) * 4;
+        } else {
+            billAmount = 100 * 1 + 100 * 2.5 + 300 * 4 + (this.unitsConsumed - 500) * 6;
+        }
+        return billAmount;
+    }
+}
+
+class CommercialBill extends EBBill {
+    public CommercialBill(int consumerNo, String consumerName, int prevMonthReading, int currMonthReading) {
+        super(consumerNo, consumerName, prevMonthReading, currMonthReading, "Commercial");
+    }
+
+    @Override
+    public double calculateBillAmount() {
+        double billAmount = 0;
+        if (this.unitsConsumed <= 100) {
+            billAmount = this.unitsConsumed * 2;
+        } else if (this.unitsConsumed <= 200) {
+            billAmount = 100 * 2 + (this.unitsConsumed - 100) * 4.5;
+        } else if (this.unitsConsumed <= 500) {
+            billAmount = 100 * 2 + 100 * 4.5 + (this.unitsConsumed - 200) * 6;
+        } else {
+            billAmount = 100 * 2 + 100 * 4.5 + 300 * 6 + (this.unitsConsumed - 500) * 7;
+        }
+        return billAmount;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+
+    //System.out.print("Enter Consumer No.: ");
+    int consumerNo = sc.nextInt();
+
+    //System.out.print("Enter Consumer Name: ");
+    String consumerName = sc.next();
+
+    //System.out.print("Enter Previous Month Reading: ");
+    int prevMonthReading = sc.nextInt();
+
+    //System.out.print("Enter Current Month Reading: ");
+    int currMonthReading = sc.nextInt();
+
+    //System.out.print("Enter EB Connection Type (Domestic/Commercial): ");
+    String ebConnectionType = sc.next();
+
+    EBBill ebBill;
+
+    if (ebConnectionType.equalsIgnoreCase("Domestic")) {
+        ebBill = new DomesticBill(consumerNo, consumerName, prevMonthReading, currMonthReading);
+    } else {
+        ebBill = new CommercialBill(consumerNo, consumerName, prevMonthReading, currMonthReading);
+    }
+
+    ebBill.displayBill();
+}   
+}
+
