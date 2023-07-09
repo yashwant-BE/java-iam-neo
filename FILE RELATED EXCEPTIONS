@@ -1,0 +1,56 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        //System.out.print("Enter the filename to write: ");
+        String filename = scanner.nextLine();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            //System.out.println("Enter the contents to write to the file: ");
+            String line;
+            while (!(line = scanner.nextLine()).equals("")) {
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("Contents written to file successfully!");
+        } catch (IOException e) {
+            System.out.println("Error writing to file: " + e.getMessage());
+            return;
+        }
+
+        //System.out.print("Enter the filename to copy to: ");
+        String copyFilename = scanner.nextLine();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename));
+             BufferedWriter writer = new BufferedWriter(new FileWriter(copyFilename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                writer.write(line);
+                writer.newLine();
+            }
+            System.out.println("File contents copied successfully!");
+        } catch (IOException e) {
+            System.out.println("Error copying file: " + e.getMessage());
+            return;
+        }
+
+        //System.out.print("Enter the filename to display: ");
+        String displayFilename = scanner.nextLine();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(displayFilename))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        }
+    }
+}
