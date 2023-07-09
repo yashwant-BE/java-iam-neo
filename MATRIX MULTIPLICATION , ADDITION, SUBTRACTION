@@ -1,0 +1,90 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        
+        Scanner input = new Scanner(System.in);
+        
+        // Prompt user to input dimensions of matrices
+        //System.out.print("Enter number of rows in matrices: ");
+        int rows = input.nextInt();
+        //System.out.print("Enter number of columns in matrices: ");
+        int columns = input.nextInt();
+        
+        // Create two matrices with specified dimensions
+        int[][] matrix1 = new int[rows][columns];
+        int[][] matrix2 = new int[rows][columns];
+        
+        // Prompt user to input elements of matrix 1
+        //System.out.println("Enter elements of matrix 1: ");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                matrix1[i][j] = input.nextInt();
+            }
+        }
+        
+        // Prompt user to input elements of matrix 2
+        //System.out.println("Enter elements of matrix 2: ");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                matrix2[i][j] = input.nextInt();
+            }
+        }
+        
+        // Perform matrix addition
+        int[][] sum = new int[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                sum[i][j] = matrix1[i][j] + matrix2[i][j];
+            }
+        }
+        
+        // Perform matrix subtraction
+        int[][] diff = new int[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                diff[i][j] = matrix1[i][j] - matrix2[i][j];
+            }
+        }
+        
+        // Perform matrix multiplication
+        int[][] product = new int[rows][columns];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                for (int k = 0; k < columns; k++) {
+                    product[i][j] += matrix1[i][k] * matrix2[k][j];
+                }
+            }
+        }
+        
+        // Display results
+        System.out.println("Matrix 1: ");
+        displayMatrix(matrix1);
+        
+        System.out.println("Matrix 2: ");
+        displayMatrix(matrix2);
+        
+        System.out.println("Matrix Sum: ");
+        displayMatrix(sum);
+        
+        System.out.println("Matrix Difference: ");
+        displayMatrix(diff);
+        
+        System.out.println("Matrix Product: ");
+        displayMatrix(product);
+        
+        input.close();
+    }
+    
+    // Method to display a matrix
+    public static void displayMatrix(int[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                System.out.print(matrix[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+}
