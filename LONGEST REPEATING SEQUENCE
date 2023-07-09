@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String inputString = scanner.nextLine();
+
+        String longestSeq = find_seq(inputString);
+
+        if (longestSeq.isEmpty()) {
+            System.out.println("No repeating sequence found");
+        } else {
+            System.out.println(longestSeq);
+        }
+    }
+
+    public static String find_seq(String inputString) {
+        int inputStringLength = inputString.length();
+        String longestSeq = "";
+
+        for (int i = 0; i < inputStringLength; i++) {
+            for (int j = i + 1; j < inputStringLength; j++) {
+                String sub = inputString.substring(i, j);
+
+                for (int k = j; k < inputStringLength; k++) {
+                    int len = sub.length();
+
+                    if (k + len <= inputStringLength && sub.equals(inputString.substring(k, k + len))) {
+                        if (len > longestSeq.length()) {
+                            longestSeq = sub;
+                        }
+                    }
+                }
+            }
+        }
+
+        return longestSeq;
+    }
+}
