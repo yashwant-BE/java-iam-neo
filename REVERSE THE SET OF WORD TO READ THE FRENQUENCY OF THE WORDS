@@ -1,0 +1,42 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String inputString = scanner.nextLine().toLowerCase();
+
+        String words[] = inputString.split("\\W+");
+        StringBuilder reversedString = new StringBuilder();
+        
+        for (int i = words.length - 1; i >= 0; i--) 
+        {
+            reversedString.append(words[i]).append(" ");
+        }
+        String outputString = reversedString.toString().trim();
+
+        Map<Character, Integer> dict = new HashMap<>();
+        for (char c : inputString.toCharArray()) 
+        {
+            if (Character.isLetter(c)) 
+            {
+                if (dict.containsKey(c)) 
+                {
+                    dict.put(c, dict.get(c) + 1);
+                } 
+                else 
+                {
+                    dict.put(c, 1);
+                }
+            }
+        }
+
+        System.out.println("Reversed string: " + outputString);
+        System.out.println("Letter frequencies:");
+        for (Map.Entry<Character, Integer> entry : dict.entrySet()) 
+        {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+}
