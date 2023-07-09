@@ -1,0 +1,48 @@
+
+#include<iostream>
+#include<string>
+using namespace std;
+int main()
+{
+    float num1, num2, ans;
+    char Operator;
+
+    try
+    {
+        cin>>num1;
+        if(num1==0)
+            throw 0;
+        cin>>Operator;
+        if(Operator != '+' && Operator != '-' &&
+            Operator != '*' && Operator != '/')
+        throw Operator;
+        cin>>num2;
+        switch(Operator)
+        {
+            case '+':
+                ans = num1 + num2;
+                break;
+            case '-':
+                ans = num1 - num2;
+                break;
+            case '*':
+                ans = num1 * num2;
+                break;
+            case '/':
+                ans = num1 / num2;
+                break;
+        }
+        if(num2 == 0)
+            throw 0;
+        cout<<ans;
+    }
+    catch(const char c)
+    {
+        cout<<"Exception : The operator is not valid";
+    }
+    catch(const int n)
+    {
+        cout<<"Exception : Division by zero";
+    }
+    return 0;
+}
